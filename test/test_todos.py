@@ -1,8 +1,8 @@
 
 from fastapi import status
-from ..routers.todos import get_db
-from ..routers.auth import get_current_user
-from ..models import Todo
+from routers.todos import get_db
+from routers.auth import get_current_user
+from models import Todo
 
 from .utils import *
 

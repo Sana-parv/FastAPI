@@ -5,9 +5,9 @@ from packaging import tags
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 from starlette import status
-from ..models import Todo
-from ..database import   SessionLocal
-from .auth import get_current_user, templates
+from models import Todo
+from database import   SessionLocal
+from auth import get_current_user, templates
 from starlette.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 
