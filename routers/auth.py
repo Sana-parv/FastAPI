@@ -92,11 +92,14 @@ def authenticate_user(username: str, password: str, db):
     print("USER FOUND:", user)
 
     if not user:
+        print("USER NOT FOUND")
         return False
 
-    print("PASSWORD CHECK:", bcrypt_context.verify(password, user.hashed_password))
+    password_check = bcrypt_context.verify(password, user.hashed_password)
 
-    if not bcrypt_context.verify(password, user.hashed_password):
+    print("PASSWORD CHECK:", password_check)
+
+    if not password_check:
         return False
 
     return user
