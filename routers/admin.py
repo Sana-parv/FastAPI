@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from starlette import status
 from models import Todo
 from database import   SessionLocal
-from auth import get_current_user
+from routers.auth import get_current_user
 
 router = APIRouter(
     prefix="/admin",
