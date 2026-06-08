@@ -84,17 +84,22 @@ def render_register_page(request: Request):
 
 
 #### Endpoints ###
-def authenticate_user(username :str ,password : str,db):
+def authenticate_user(username: str, password: str, db):
+    print("USERNAME:", username)
+
     user = db.query(Users).filter(Users.username == username).first()
+
+    print("USER FOUND:", user)
+
     if not user:
         return False
+
+    print("PASSWORD CHECK:", bcrypt_context.verify(password, user.hashed_password))
 
     if not bcrypt_context.verify(password, user.hashed_password):
         return False
 
     return user
-
-
 
 #This function creates the JWT token.
 def create_access_token(username: str, user_id: int,role : str, expires_delta: timedelta):
