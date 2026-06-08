@@ -31,7 +31,7 @@ user_dependency = Annotated[dict,Depends(get_current_user)]
 
 
 
-templates  = Jinja2Templates(directory='TodoApp/templates')
+templates = Jinja2Templates(directory='templates')
 
 class TodoRequest(BaseModel):
     title: str = Field(min_length=3)
@@ -48,7 +48,11 @@ def redirect_to_login():
 @router.get("/todo-page")
 async def render_todo_page(request: Request,db: db_dependency):
     try:
-        user = await get_current_user(request.cookies.get("access_token"))
+        token = request.cookies.get("access_token")
+        print("COOKIE =", token)
+
+        user = await get_current_user(token)
+        print("COOKIE =", request.cookies.get("access_token"))
         if user is None:
          return redirect_to_login()
 
@@ -76,7 +80,8 @@ async def render_todo_page(request:Request):
             context={
                 "user": user
             })
-    except:
+    except Exception as e:
+        print("ERROR =", e)
         return redirect_to_login()
 
 @router.get('/edit-todo-page/{todo_id}')
