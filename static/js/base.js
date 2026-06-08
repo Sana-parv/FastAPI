@@ -151,7 +151,8 @@
                     // Delete any cookies available
                     logout();
                     // Save token to cookie
-                    document.cookie = `access_token=${data.access_token}; path=/`;
+                    document.cookie = `access_token=${data.access_token}; path=/; SameSite=Lax`;
+                    console.log("COOKIE AFTER LOGIN:", document.cookie);
                     window.location.href = '/todos1/todo-page'; // Change this to your desired redirect page
                 } else {
                     // Handle error
